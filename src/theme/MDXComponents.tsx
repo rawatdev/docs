@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import type { ComponentProps } from "react";
 // Import the original mapper
 import MDXComponents from "@theme-original/MDXComponents";
@@ -13,6 +14,7 @@ import CollapseBox from "@site/src/components/collapsible";
 import TopSection from "@site/src/components/topSection";
 import { useLocation } from "@docusaurus/router";
 import styles from "./styles.module.scss";
+import clsx from "clsx";
 
 // TODO: do we want to fix this?
 const TopBlock: React.FC<React.PropsWithChildren> = ({
@@ -137,6 +139,12 @@ const StyledLink: React.FC<React.PropsWithChildren<ComponentProps<"a">>> = ({
     );
 };
 
+const Image: React.FC<React.PropsWithChildren<ComponentProps<"img">>> = ({
+  ...props
+}) => {
+  return <img {...props} className={clsx(props.className, styles.img)} />
+}
+
 export default {
   // Re-use the default mapping
   ...MDXComponents,
@@ -147,6 +155,7 @@ export default {
   TabItem,
   a: StyledLink,
   Link,
+  img: Image,
   TopBlock,
   CodeWithResult,
   SwitchTech,
